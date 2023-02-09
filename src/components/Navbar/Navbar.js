@@ -24,12 +24,6 @@ const useStyles = makeStyles((theme) => ({
   customer: {
     paddingLeft: 65,
   },
-  link: {
-    fontSize: "16px",
-    textDecoration: "none",
-    boxShadow: "none",
-    color: "white",
-  },
 }));
 
 function Navbar() {
