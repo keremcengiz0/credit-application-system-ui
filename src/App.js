@@ -1,7 +1,8 @@
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MakeApplicationForm from "./components/Application/MakeApplicationForm";
+import CreateACustomerAndMakeAnApplicationForm from "./components/Application/CreateACustomerAndMakeAnApplicationForm";
+import MakeAnApplicationForm from "./components/Application/MakeAnApplicationForm";
 
 function App() {
   return (
@@ -12,7 +13,12 @@ function App() {
           <Route
             exact
             path="/api/v1/applications/create-customer-and-make-application"
-            element={<MakeApplicationForm />}
+            element={<CreateACustomerAndMakeAnApplicationForm />}
+          ></Route>
+          <Route
+            exact
+            path="/api/v1/applications/make-application"
+            element={<MakeAnApplicationForm />}
           ></Route>
         </Routes>
       </BrowserRouter>

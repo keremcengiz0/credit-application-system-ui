@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   textfield: { marginTop: 20 },
 }));
 
-function MakeApplicationForm() {
+function CreateACustomerAndMakeAnApplicationForm() {
   const [activeStep, setActiveStep] = useState(0);
   const classes = useStyles();
   const refreshPage = () => window.location.reload(true);
@@ -180,4 +180,4 @@ function MakeApplicationForm() {
   );
 }
 
-export default MakeApplicationForm;
+export default CreateACustomerAndMakeAnApplicationForm;
