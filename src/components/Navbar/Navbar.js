@@ -70,9 +70,12 @@ function Navbar() {
           >
             <Link
               className={classes.link}
-              to={{ pathname: "/api/v1/applications/make-application" }}
+              to={{
+                pathname:
+                  "/api/v1/applications/create-customer-and-make-application",
+              }}
             >
-              Make Application
+              Create a Customer And Make an Application
             </Link>
           </Typography>
           <Typography
@@ -87,7 +90,24 @@ function Navbar() {
           >
             <Link
               className={classes.link}
-              to={{ pathname: "/api/v1/applications/get-status" }}
+              to={{ pathname: "/api/v1/applications/make-application" }}
+            >
+              Make an Application
+            </Link>
+          </Typography>
+          <Typography
+            variant="h6"
+            component="div"
+            className={classes.customer}
+            sx={{
+              fontFamily: "monospace",
+              fontWeight: 700,
+              color: "inherit",
+            }}
+          >
+            <Link
+              className={classes.link}
+              to={{ pathname: "/api/v1/customers" }}
             >
               Get Status
             </Link>

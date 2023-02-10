@@ -11,7 +11,7 @@ function App() {
         <Routes>
           <Route
             exact
-            path="/api/v1/applications/make-application"
+            path="/api/v1/applications/create-customer-and-make-application"
             element={<MakeApplicationForm />}
           ></Route>
         </Routes>
