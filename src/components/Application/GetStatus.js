@@ -62,15 +62,13 @@ function GetStatus() {
             />
             <Button
               onClick={handleSubmit}
-              style={{ paddingLeft: 30, paddingTop: 35 }}
+              style={{ marginLeft: 30, marginTop: 30 }}
             >
               <b>SEARCH</b>
             </Button>
           </Grid>
         </Grid>
-
         <br />
-
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
             <TableHead>

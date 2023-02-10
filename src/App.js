@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CreateACustomerAndMakeAnApplicationForm from "./components/Application/CreateACustomerAndMakeAnApplicationForm";
 import MakeAnApplicationForm from "./components/Application/MakeAnApplicationForm";
 import GetStatus from "./components/Application/GetStatus";
+import GetCustomer from "./components/Customer/GetCustomer";
 
 function App() {
   return (
@@ -25,6 +26,11 @@ function App() {
             exact
             path="/api/v1/applications/get-status"
             element={<GetStatus />}
+          ></Route>
+          <Route
+            exact
+            path="/api/v1/customers"
+            element={<GetCustomer />}
           ></Route>
         </Routes>
       </BrowserRouter>

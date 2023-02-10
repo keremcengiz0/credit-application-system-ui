@@ -144,7 +144,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
               className={classes.textfield}
             />
             <Button
-              style={{ marginLeft: -100, paddingTop: 100 }}
+              style={{ marginLeft: -100, marginTop: 100 }}
               onClick={handleSubmit}
             >
               <b>CREATE</b>
@@ -186,7 +186,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
             />
             <Button
               onClick={handleApplicationSubmit}
-              style={{ paddingLeft: 25, paddingTop: 20 }}
+              style={{ marginLeft: 25, marginTop: 20 }}
             >
               <b>APPLY</b>
             </Button>

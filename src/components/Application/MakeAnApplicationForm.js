@@ -101,7 +101,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
             }
           />
           <Button
-            style={{ paddingLeft: 40, paddingTop: 40 }}
+            style={{ marginLeft: 30, marginTop: 40 }}
             onClick={handleApplicationSubmit}
           >
             <b>APPLY</b>
