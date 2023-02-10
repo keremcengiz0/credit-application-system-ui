@@ -39,10 +39,6 @@ function CreateACustomerAndMakeAnApplicationForm() {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setStateCustomer({ ...stateCustomer, [name]: value });
@@ -84,17 +80,32 @@ function CreateACustomerAndMakeAnApplicationForm() {
 
   return (
     <div>
-      <Stepper activeStep={activeStep}>
-        {steps.map((label, index) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
+      <br />
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Stepper
+          activeStep={activeStep}
+          style={{
+            width: "80%",
+            backgroundColor: "transparent",
+            marginLeft: 100,
+          }}
+        >
+          {steps.map((label) => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+      </div>
+      <br />
+      <br />
+
       <div>
         {activeStep === 0 && (
           <div>
-            <Typography variant="h5">Create a Customer</Typography>
+            <Typography variant="h5">
+              <b>Create a Customer</b>
+            </Typography>
             <TextField
               label="Kimlik Numarası"
               name="identityNumber"
@@ -143,6 +154,8 @@ function CreateACustomerAndMakeAnApplicationForm() {
         {activeStep === 1 && (
           <div>
             <Typography variant="h5">Make an Application</Typography>
+            <br />
+            <br />
             <TextField
               label="Kimlik Numarası"
               name="identityNumber"
@@ -171,8 +184,10 @@ function CreateACustomerAndMakeAnApplicationForm() {
                 })
               }
             />
-            <Button onClick={handleBack}>Geri</Button>
-            <Button onClick={handleApplicationSubmit}>
+            <Button
+              onClick={handleApplicationSubmit}
+              style={{ paddingLeft: 25, paddingTop: 20 }}
+            >
               <b>APPLY</b>
             </Button>
           </div>

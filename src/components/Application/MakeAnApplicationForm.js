@@ -48,6 +48,9 @@ function CreateACustomerAndMakeAnApplicationForm() {
 
   return (
     <div>
+      <br />
+      <br />
+
       <Stepper>
         {steps.map((label) => (
           <Step key={label}>
@@ -55,10 +58,11 @@ function CreateACustomerAndMakeAnApplicationForm() {
           </Step>
         ))}
       </Stepper>
+
       <div>
         <div>
           <Typography style={{ marginLeft: -60 }} variant="h5">
-            Make an Application
+            <b>Make an Application</b>
           </Typography>
           <TextField
             label="Kimlik Numarası"
