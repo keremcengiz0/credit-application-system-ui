@@ -107,7 +107,7 @@ function Navbar() {
           >
             <Link
               className={classes.link}
-              to={{ pathname: "/api/v1/customers" }}
+              to={{ pathname: "/api/v1/applications/get-status" }}
             >
               Get Status
             </Link>

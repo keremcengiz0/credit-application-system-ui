@@ -57,8 +57,8 @@ function CreateACustomerAndMakeAnApplicationForm() {
       </Stepper>
       <div>
         <div>
-          <Typography style={{ marginLeft: -60 }} variant="h6">
-            Başvuru Yap
+          <Typography style={{ marginLeft: -60 }} variant="h5">
+            Make an Application
           </Typography>
           <TextField
             label="Kimlik Numarası"
@@ -100,7 +100,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
             style={{ paddingLeft: 40, paddingTop: 40 }}
             onClick={handleApplicationSubmit}
           >
-            Başvuru Yap
+            <b>APPLY</b>
           </Button>
         </div>
       </div>

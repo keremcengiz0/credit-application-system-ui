@@ -33,7 +33,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
     salary: "",
     guarantee: "",
   });
-  const steps = ["Müşteri Oluştur", "Başvuru Yap"];
+  const steps = ["Create a Customer", "Make an Application"];
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -94,7 +94,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
       <div>
         {activeStep === 0 && (
           <div>
-            <Typography variant="h6">Müşteri Oluştur</Typography>
+            <Typography variant="h5">Create a Customer</Typography>
             <TextField
               label="Kimlik Numarası"
               name="identityNumber"
@@ -133,16 +133,16 @@ function CreateACustomerAndMakeAnApplicationForm() {
               className={classes.textfield}
             />
             <Button
-              style={{ marginLeft: -150, paddingTop: 100 }}
+              style={{ marginLeft: -100, paddingTop: 100 }}
               onClick={handleSubmit}
             >
-              Müşteri Oluştur
+              <b>CREATE</b>
             </Button>
           </div>
         )}
         {activeStep === 1 && (
           <div>
-            <Typography variant="h6">Başvuru Yap</Typography>
+            <Typography variant="h5">Make an Application</Typography>
             <TextField
               label="Kimlik Numarası"
               name="identityNumber"
@@ -172,7 +172,9 @@ function CreateACustomerAndMakeAnApplicationForm() {
               }
             />
             <Button onClick={handleBack}>Geri</Button>
-            <Button onClick={handleApplicationSubmit}>Başvuru Yap</Button>
+            <Button onClick={handleApplicationSubmit}>
+              <b>APPLY</b>
+            </Button>
           </div>
         )}
       </div>

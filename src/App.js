@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CreateACustomerAndMakeAnApplicationForm from "./components/Application/CreateACustomerAndMakeAnApplicationForm";
 import MakeAnApplicationForm from "./components/Application/MakeAnApplicationForm";
+import GetStatus from "./components/Application/GetStatus";
 
 function App() {
   return (
@@ -19,6 +20,11 @@ function App() {
             exact
             path="/api/v1/applications/make-application"
             element={<MakeAnApplicationForm />}
+          ></Route>
+          <Route
+            exact
+            path="/api/v1/applications/get-status"
+            element={<GetStatus />}
           ></Route>
         </Routes>
       </BrowserRouter>
