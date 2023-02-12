@@ -5,6 +5,7 @@ import CreateACustomerAndMakeAnApplicationForm from "./components/Application/Cr
 import MakeAnApplicationForm from "./components/Application/MakeAnApplicationForm";
 import GetStatus from "./components/Application/GetStatus";
 import GetCustomer from "./components/Customer/GetCustomer";
+import UpdateCustomer from "./components/Customer/UpdateCustomer";
 
 function App() {
   return (
@@ -31,6 +32,11 @@ function App() {
             exact
             path="/api/v1/customers"
             element={<GetCustomer />}
+          ></Route>
+          <Route
+            exact
+            path="/api/v1/customers/update/:id"
+            element={<UpdateCustomer />}
           ></Route>
         </Routes>
       </BrowserRouter>
