@@ -9,6 +9,9 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Container from "@mui/material/Container";
+import DeleteIcon from "@mui/icons-material/Delete";
+import SystemUpdateAltIcon from "@mui/icons-material/SystemUpdateAlt";
+import IconButton from "@mui/material/IconButton";
 
 const useStyles = makeStyles({
   table: {
@@ -24,6 +27,18 @@ function GetCustomer() {
   const [error, setError] = useState(null);
   const [customers, setCustomers] = useState([]);
   const classes = useStyles();
+
+  const deleteCustomer = (customerId) => {
+    axios
+      .delete(`/api/v1/customers/${customerId}`)
+      .then((response) => {
+        console.log(response);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   useEffect(() => {
     axios
@@ -71,6 +86,7 @@ function GetCustomer() {
                 <TableCell align="center" className={classes.tableTitle}>
                   Birth Date (yyyy-mm-dd)
                 </TableCell>
+                <TableCell align="center" className={classes.tableTitle} />
               </TableRow>
             </TableHead>
             <TableBody>
@@ -88,6 +104,22 @@ function GetCustomer() {
                     (+90){customer.phoneNumber}
                   </TableCell>
                   <TableCell align="center">{customer.birthDate}</TableCell>
+                  <TableCell align="center">
+                    <IconButton
+                      onClick={() => {
+                        deleteCustomer(customer.id);
+                      }}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                    <IconButton
+                      onClick={() => {
+                        window.location = `/api/v1/customers/update/${customer.id}`;
+                      }}
+                    >
+                      <SystemUpdateAltIcon />
+                    </IconButton>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
