@@ -2,11 +2,9 @@ import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link, useNavigate } from "react-router-dom";
-import { LockOpen } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   link: {
@@ -28,14 +26,6 @@ const useStyles = makeStyles((theme) => ({
 
 function Navbar() {
   const classes = useStyles();
-  let navigate = useNavigate();
-
-  const onClick = () => {
-    localStorage.removeItem("currentUser");
-    localStorage.removeItem("refreshKey");
-    localStorage.removeItem("userName");
-    navigate("/auth/login");
-  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -129,31 +119,6 @@ function Navbar() {
               Get Customer
             </Link>
           </Typography>
-
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <Typography variant="h10">
-                {localStorage.getItem("currentUser") == null ? (
-                  <Link className={classes.link} to="/auth/login">
-                    LOGIN
-                  </Link>
-                ) : (
-                  <div>
-                    <IconButton variant="h6" onClick={onClick}>
-                      <LockOpen> </LockOpen>
-                    </IconButton>
-                  </div>
-                )}
-              </Typography>
-            </IconButton>
-          </Box>
         </Toolbar>
       </AppBar>
     </Box>

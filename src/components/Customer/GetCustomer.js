@@ -10,8 +10,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Container from "@mui/material/Container";
 import DeleteIcon from "@mui/icons-material/Delete";
-import SystemUpdateAltIcon from "@mui/icons-material/SystemUpdateAlt";
 import IconButton from "@mui/material/IconButton";
+import CreateIcon from "@mui/icons-material/Create";
 
 const useStyles = makeStyles({
   table: {
@@ -62,7 +62,6 @@ function GetCustomer() {
         <br />
         <h2 style={{ textAlign: "center" }}>Customers</h2>
         <br />
-
         <br />
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
@@ -117,7 +116,7 @@ function GetCustomer() {
                         window.location = `/api/v1/customers/update/${customer.id}`;
                       }}
                     >
-                      <SystemUpdateAltIcon />
+                      <CreateIcon />
                     </IconButton>
                   </TableCell>
                 </TableRow>
