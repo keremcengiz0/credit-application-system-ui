@@ -23,6 +23,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertType, setAlertType] = useState("success");
   const [alertMessage, setAlertMessage] = useState("");
+  const [identityNumberError, setIdentityNumberError] = useState(false);
 
   const [stateApplication, setStateApplication] = useState({
     identityNumber: "",
@@ -38,6 +39,19 @@ function CreateACustomerAndMakeAnApplicationForm() {
   };
 
   const steps = ["Make an Application"];
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    if (name === "identityNumber") {
+      if (value.length !== 11) {
+        setIdentityNumberError(true);
+      } else {
+        setIdentityNumberError(false);
+      }
+    }
+    setStateApplication({ ...stateApplication, [name]: value });
+  };
 
   const handleApplicationSubmit = async () => {
     const applicationData = { ...stateApplication };
@@ -92,12 +106,12 @@ function CreateACustomerAndMakeAnApplicationForm() {
             name="identityNumber"
             value={stateApplication.identityNumber}
             className={classes.textfield}
-            onChange={(event) =>
-              setStateApplication({
-                ...stateApplication,
-                identityNumber: event.target.value,
-              })
+            onChange={handleChange}
+            error={identityNumberError}
+            helperText={
+              identityNumberError ? "Identity Number must be 11 digits." : null
             }
+            inputProps={{ maxLength: 11 }}
           />
           <TextField
             label="Salary"
