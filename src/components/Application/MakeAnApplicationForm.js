@@ -51,7 +51,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
         setAlertMessage("Application completed successfully");
         setAlertOpen(true);
         setTimeout(() => {
-          navigate("/");
+          navigate("/api/v1/applications/get-status");
         }, 2000);
       }
     } catch (error) {
