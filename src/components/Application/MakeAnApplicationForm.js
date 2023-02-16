@@ -12,6 +12,7 @@ import Axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import { useNavigate } from "react-router-dom";
 import MuiAlert from "@material-ui/lab/Alert";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const useStyles = makeStyles((theme) => ({
   textfield: { marginTop: 20 },
@@ -24,6 +25,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
   const [alertType, setAlertType] = useState("success");
   const [alertMessage, setAlertMessage] = useState("");
   const [identityNumberError, setIdentityNumberError] = useState(false);
+  const [progress, setProgress] = useState(false);
 
   const [stateApplication, setStateApplication] = useState({
     identityNumber: "",
@@ -54,6 +56,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
   };
 
   const handleApplicationSubmit = async () => {
+    setProgress(true);
     const applicationData = { ...stateApplication };
     try {
       const response = await Axios.post(
@@ -61,6 +64,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
         applicationData
       );
       if (response.status === 200) {
+        setProgress(false);
         setAlertType("success");
         setAlertMessage("Application completed successfully");
         setAlertOpen(true);
@@ -69,6 +73,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
         }, 2000);
       }
     } catch (error) {
+      setProgress(false);
       setAlertType("error");
       setAlertMessage("Application failed");
       setAlertOpen(true);
@@ -80,6 +85,23 @@ function CreateACustomerAndMakeAnApplicationForm() {
     <div>
       <br />
       <br />
+      {progress && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <CircularProgress />
+        </div>
+      )}
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Stepper
           style={{

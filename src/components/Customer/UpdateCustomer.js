@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@mui/material/Typography";
 import MuiAlert from "@material-ui/lab/Alert";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const useStyles = makeStyles((theme) => ({
   textfield: { marginTop: 20 },
@@ -32,6 +33,7 @@ const UpdateCustomer = () => {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertType, setAlertType] = useState("success");
   const [alertMessage, setAlertMessage] = useState("");
+  const [progress, setProgress] = useState(false);
 
   const [customer, setCustomer] = useState({
     identityNumber: "",
@@ -55,11 +57,13 @@ const UpdateCustomer = () => {
   };
 
   const handleUpdate = async () => {
+    setProgress(true);
     try {
       await axios.put(`/customers/${id}`, customer);
       setAlertType("success");
       setAlertMessage("The customer has been successfully updated");
       setAlertOpen(true);
+      setProgress(false);
       setTimeout(() => {
         navigate("/customers");
       }, 2000);
@@ -67,6 +71,7 @@ const UpdateCustomer = () => {
       setAlertType("error");
       setAlertMessage("The customer could not be updated");
       setAlertOpen(true);
+      setProgress(false);
     }
   };
 
@@ -79,12 +84,28 @@ const UpdateCustomer = () => {
 
   return (
     <div>
+      {progress && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <CircularProgress />
+        </div>
+      )}
       <Stepper activeStep={0}>
         <Step>
           <StepLabel>Update a Customer</StepLabel>
         </Step>
       </Stepper>
-
       <Typography variant="h5">
         <b>Update a Customer</b>
       </Typography>

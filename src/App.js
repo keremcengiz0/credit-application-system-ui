@@ -6,6 +6,7 @@ import MakeAnApplicationForm from "./components/Application/MakeAnApplicationFor
 import GetStatus from "./components/Application/GetStatus";
 import GetCustomer from "./components/Customer/GetCustomer";
 import UpdateCustomer from "./components/Customer/UpdateCustomer";
+import Home from "./components/Home/Home";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <BrowserRouter>
         <Navbar></Navbar>
         <Routes>
+          <Route exact path="" element={<Home />}></Route>
           <Route
             exact
             path="/applications/create-customer-and-make-application"
