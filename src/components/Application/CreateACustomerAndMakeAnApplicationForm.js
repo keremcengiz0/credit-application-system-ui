@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
 function CreateACustomerAndMakeAnApplicationForm() {
   const [activeStep, setActiveStep] = useState(0);
   const classes = useStyles();
-  const refreshPage = () => window.location.reload(true);
   let navigate = useNavigate();
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertType, setAlertType] = useState("success");
@@ -59,7 +58,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
           identityNumber: customerData.identityNumber,
         });
         setAlertType("success");
-        setAlertMessage("Müşteri başarıyla oluşturuldu");
+        setAlertMessage("THE CUSTOMER HAS BEEN SUCCESSFULLY CREATED");
         setAlertOpen(true);
         setTimeout(() => {
           handleNext();
@@ -68,7 +67,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
     } catch (error) {
       console.error(error);
       setAlertType("error");
-      setAlertMessage("Müşteri oluşturulamadı");
+      setAlertMessage("FAILED TO CREATE CUSTOMER");
       setAlertOpen(true);
     }
   };
@@ -86,14 +85,19 @@ function CreateACustomerAndMakeAnApplicationForm() {
       const response = await Axios.post(
         `/api/v1/applications/${applicationData.identityNumber}`,
         applicationData
-      ).then((response) => {
-        refreshPage();
-      });
+      );
       if (response.status === 200) {
-        console.log("Başvuru oluşturuldu!");
-        navigate("/");
+        setAlertType("success");
+        setAlertMessage("Application completed successfully");
+        setAlertOpen(true);
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
       }
     } catch (error) {
+      setAlertType("error");
+      setAlertMessage("Application failed");
+      setAlertOpen(true);
       console.error(error);
     }
   };
@@ -172,7 +176,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
 
             <Snackbar
               open={alertOpen}
-              autoHideDuration={2000}
+              autoHideDuration={1500}
               onClose={handleCloseAlert}
             >
               <MuiAlert
@@ -224,6 +228,20 @@ function CreateACustomerAndMakeAnApplicationForm() {
               style={{ marginLeft: 25, marginTop: 20 }}
             >
               <b>APPLY</b>
+              <Snackbar
+                open={alertOpen}
+                autoHideDuration={1500}
+                onClose={handleCloseAlert}
+              >
+                <MuiAlert
+                  elevation={6}
+                  variant="filled"
+                  onClose={handleCloseAlert}
+                  severity={alertType}
+                >
+                  {alertMessage}
+                </MuiAlert>
+              </Snackbar>
             </Button>
           </div>
         )}

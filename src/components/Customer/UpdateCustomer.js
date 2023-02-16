@@ -58,14 +58,14 @@ const UpdateCustomer = () => {
     try {
       await axios.put(`/api/v1/customers/${id}`, customer);
       setAlertType("success");
-      setAlertMessage("Müşteri başarıyla güncellendi");
+      setAlertMessage("THE CUSTOMER HAS BEEN SUCCESSFULLY UPDATED");
       setAlertOpen(true);
       setTimeout(() => {
         navigate("/api/v1/customers");
       }, 2000);
     } catch (error) {
       setAlertType("error");
-      setAlertMessage("Müşteri güncellenemedi");
+      setAlertMessage("THE CUSTOMER COULD NOT BE UPDATED");
       setAlertOpen(true);
     }
   };
