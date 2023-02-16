@@ -19,6 +19,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import Button from "@mui/material/Button";
+import { TextField } from "@material-ui/core";
 
 const useStyles = makeStyles({
   table: {
@@ -38,6 +39,7 @@ function GetCustomer() {
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleClickOpen = (id) => {
     setCustomerId(id);
@@ -87,6 +89,14 @@ function GetCustomer() {
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
+              <TextField
+                label="Search by Identity Number"
+                variant="outlined"
+                size="small"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                style={{ marginTop: 10 }}
+              />
               <TableRow>
                 <TableCell align="center" className={classes.tableTitle}>
                   Customer Id
@@ -106,66 +116,81 @@ function GetCustomer() {
                 <TableCell align="center" className={classes.tableTitle}>
                   Birth Date (yyyy-mm-dd)
                 </TableCell>
-                <TableCell align="center" className={classes.tableTitle} />
+                <TableCell align="center" className={classes.tableTitle}>
+                  Actions
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {customers.map((customer) => (
-                <TableRow key={customer.id}>
-                  <TableCell component="th" scope="row">
-                    {customer.id}
-                  </TableCell>
-                  <TableCell align="center">
-                    {customer.identityNumber}
-                  </TableCell>
-                  <TableCell align="center">{customer.firstName}</TableCell>
-                  <TableCell align="center">{customer.lastName}</TableCell>
-                  <TableCell align="center">
-                    (+90){customer.phoneNumber}
-                  </TableCell>
-                  <TableCell align="center">{customer.birthDate}</TableCell>
-                  <TableCell align="center">
-                    <IconButton onClick={() => handleClickOpen(customer.id)}>
-                      <DeleteIcon />
-                    </IconButton>
-                    <Dialog
-                      fullScreen={fullScreen}
-                      open={open}
-                      onClose={handleClose}
-                      aria-labelledby="responsive-dialog-title"
-                    >
-                      <DialogContent>
-                        <DialogContentText>
-                          <b style={{ fontSize: 24 }}>
-                            Are you sure you want to delete the customer?
-                          </b>
-                        </DialogContentText>
-                      </DialogContent>
-                      <DialogActions>
-                        <Button autoFocus onClick={handleClose}>
-                          <b>Cancel</b>
-                        </Button>
-                        <Button
-                          onClick={() => {
-                            handleClose();
-                            deleteCustomer();
-                          }}
-                          autoFocus
-                        >
-                          <b style={{ color: "red" }}>Delete</b>
-                        </Button>
-                      </DialogActions>
-                    </Dialog>
-                    <IconButton
-                      onClick={() => {
-                        window.location = `/api/v1/customers/update/${customer.id}`;
-                      }}
-                    >
-                      <CreateIcon />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-              ))}
+              {customers
+                .filter((customer) => {
+                  if (searchTerm === "") {
+                    return true;
+                  } else if (
+                    customer.identityNumber
+                      .toLowerCase()
+                      .includes(searchTerm.toLowerCase())
+                  ) {
+                    return true;
+                  }
+                  return false;
+                })
+                .map((customer) => (
+                  <TableRow key={customer.id}>
+                    <TableCell align="center" component="th" scope="row">
+                      {customer.id}
+                    </TableCell>
+                    <TableCell align="center">
+                      {customer.identityNumber}
+                    </TableCell>
+                    <TableCell align="center">{customer.firstName}</TableCell>
+                    <TableCell align="center">{customer.lastName}</TableCell>
+                    <TableCell align="center">
+                      (+90){customer.phoneNumber}
+                    </TableCell>
+                    <TableCell align="center">{customer.birthDate}</TableCell>
+                    <TableCell align="center">
+                      <IconButton onClick={() => handleClickOpen(customer.id)}>
+                        <DeleteIcon />
+                      </IconButton>
+                      <Dialog
+                        fullScreen={fullScreen}
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="responsive-dialog-title"
+                      >
+                        <DialogContent>
+                          <DialogContentText>
+                            <b style={{ fontSize: 24 }}>
+                              Are you sure you want to delete the customer?
+                            </b>
+                          </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                          <Button autoFocus onClick={handleClose}>
+                            <b>Cancel</b>
+                          </Button>
+                          <Button
+                            onClick={() => {
+                              handleClose();
+                              deleteCustomer();
+                            }}
+                            autoFocus
+                          >
+                            <b style={{ color: "red" }}>Delete</b>
+                          </Button>
+                        </DialogActions>
+                      </Dialog>
+                      <IconButton
+                        onClick={() => {
+                          window.location = `/api/v1/customers/update/${customer.id}`;
+                        }}
+                      >
+                        <CreateIcon />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </TableContainer>
