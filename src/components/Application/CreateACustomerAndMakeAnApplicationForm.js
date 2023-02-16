@@ -6,10 +6,12 @@ import {
   Button,
   Typography,
   TextField,
+  Snackbar,
 } from "@material-ui/core";
 import Axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import { useNavigate } from "react-router-dom";
+import MuiAlert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles((theme) => ({
   textfield: { marginTop: 20 },
@@ -20,6 +22,9 @@ function CreateACustomerAndMakeAnApplicationForm() {
   const classes = useStyles();
   const refreshPage = () => window.location.reload(true);
   let navigate = useNavigate();
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertType, setAlertType] = useState("success");
+  const [alertMessage, setAlertMessage] = useState("");
 
   const [stateCustomer, setStateCustomer] = useState({
     identityNumber: "",
@@ -53,11 +58,26 @@ function CreateACustomerAndMakeAnApplicationForm() {
           ...stateApplication,
           identityNumber: customerData.identityNumber,
         });
-        handleNext();
+        setAlertType("success");
+        setAlertMessage("Müşteri başarıyla oluşturuldu");
+        setAlertOpen(true);
+        setTimeout(() => {
+          handleNext();
+        }, 2000);
       }
     } catch (error) {
       console.error(error);
+      setAlertType("error");
+      setAlertMessage("Müşteri oluşturulamadı");
+      setAlertOpen(true);
     }
+  };
+
+  const handleCloseAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setAlertOpen(false);
   };
 
   const handleApplicationSubmit = async () => {
@@ -149,6 +169,21 @@ function CreateACustomerAndMakeAnApplicationForm() {
             >
               <b>CREATE</b>
             </Button>
+
+            <Snackbar
+              open={alertOpen}
+              autoHideDuration={2000}
+              onClose={handleCloseAlert}
+            >
+              <MuiAlert
+                elevation={6}
+                variant="filled"
+                onClose={handleCloseAlert}
+                severity={alertType}
+              >
+                {alertMessage}
+              </MuiAlert>
+            </Snackbar>
           </div>
         )}
         {activeStep === 1 && (
