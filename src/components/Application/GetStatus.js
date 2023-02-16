@@ -31,7 +31,7 @@ function GetStatus() {
 
   const handleSubmit = async () => {
     const response = await axios.get(
-      `/api/v1/applications/get-status?identityNumber=${identityNumber}&birthDate=${birthDate}`
+      `/applications/get-status?identityNumber=${identityNumber}&birthDate=${birthDate}`
     );
     setApplicationList(response.data);
   };
@@ -43,7 +43,12 @@ function GetStatus() {
         <br />
         <h2 style={{ textAlign: "center" }}>Get Application Status</h2>
         <br />
-        <Grid container spacing={1} justifyContent="left">
+        <Grid
+          container
+          spacing={1}
+          justifyContent="left"
+          sx={{ marginLeft: -12 }}
+        >
           <Grid item xs={12} sm={6}>
             <TextField
               label="Identity Number"

@@ -44,7 +44,7 @@ const UpdateCustomer = () => {
 
   useEffect(() => {
     const getCustomer = async () => {
-      const response = await axios.get(`/api/v1/customers/get/${id}`);
+      const response = await axios.get(`/customers/get/${id}`);
       setCustomer(response.data);
     };
     getCustomer();
@@ -56,12 +56,12 @@ const UpdateCustomer = () => {
 
   const handleUpdate = async () => {
     try {
-      await axios.put(`/api/v1/customers/${id}`, customer);
+      await axios.put(`/customers/${id}`, customer);
       setAlertType("success");
       setAlertMessage("The customer has been successfully updated");
       setAlertOpen(true);
       setTimeout(() => {
-        navigate("/api/v1/customers");
+        navigate("/customers");
       }, 2000);
     } catch (error) {
       setAlertType("error");

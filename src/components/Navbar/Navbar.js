@@ -61,8 +61,7 @@ function Navbar() {
             <Link
               className={classes.link}
               to={{
-                pathname:
-                  "/api/v1/applications/create-customer-and-make-application",
+                pathname: "/applications/create-customer-and-make-application",
               }}
             >
               Create a Customer And Make an Application
@@ -80,7 +79,7 @@ function Navbar() {
           >
             <Link
               className={classes.link}
-              to={{ pathname: "/api/v1/applications/make-application" }}
+              to={{ pathname: "/applications/make-application" }}
             >
               Make an Application
             </Link>
@@ -97,7 +96,7 @@ function Navbar() {
           >
             <Link
               className={classes.link}
-              to={{ pathname: "/api/v1/applications/get-status" }}
+              to={{ pathname: "/applications/get-status" }}
             >
               Get Status
             </Link>
@@ -112,10 +111,7 @@ function Navbar() {
               color: "inherit",
             }}
           >
-            <Link
-              className={classes.link}
-              to={{ pathname: "/api/v1/customers" }}
-            >
+            <Link className={classes.link} to={{ pathname: "/customers" }}>
               Get Customer
             </Link>
           </Typography>

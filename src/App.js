@@ -15,27 +15,23 @@ function App() {
         <Routes>
           <Route
             exact
-            path="/api/v1/applications/create-customer-and-make-application"
+            path="/applications/create-customer-and-make-application"
             element={<CreateACustomerAndMakeAnApplicationForm />}
           ></Route>
           <Route
             exact
-            path="/api/v1/applications/make-application"
+            path="/applications/make-application"
             element={<MakeAnApplicationForm />}
           ></Route>
           <Route
             exact
-            path="/api/v1/applications/get-status"
+            path="/applications/get-status"
             element={<GetStatus />}
           ></Route>
+          <Route exact path="/customers" element={<GetCustomer />}></Route>
           <Route
             exact
-            path="/api/v1/customers"
-            element={<GetCustomer />}
-          ></Route>
-          <Route
-            exact
-            path="/api/v1/customers/update/:id"
+            path="/customers/update/:id"
             element={<UpdateCustomer />}
           ></Route>
         </Routes>

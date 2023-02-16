@@ -51,7 +51,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
   const handleSubmit = async () => {
     const customerData = { ...stateCustomer };
     try {
-      const response = await Axios.post("/api/v1/customers", customerData);
+      const response = await Axios.post("/customers", customerData);
       if (response.status === 200) {
         setStateApplication({
           ...stateApplication,
@@ -83,7 +83,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
     const applicationData = { ...stateApplication };
     try {
       const response = await Axios.post(
-        `/api/v1/applications/${applicationData.identityNumber}`,
+        `/applications/${applicationData.identityNumber}`,
         applicationData
       );
       if (response.status === 200) {
@@ -91,7 +91,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
         setAlertMessage("Application completed successfully");
         setAlertOpen(true);
         setTimeout(() => {
-          navigate("/api/v1/applications/get-status");
+          navigate("/applications/get-status");
         }, 2000);
       }
     } catch (error) {

@@ -53,7 +53,7 @@ function GetCustomer() {
 
   const deleteCustomer = () => {
     axios
-      .delete(`/api/v1/customers/${customerId}`)
+      .delete(`/customers/${customerId}`)
       .then((response) => {
         console.log(response);
         window.location.reload();
@@ -65,7 +65,7 @@ function GetCustomer() {
 
   useEffect(() => {
     axios
-      .get(`/api/v1/customers`)
+      .get(`/customers`)
       .then(
         (response) => {
           setIsLoaded(true);
@@ -183,7 +183,7 @@ function GetCustomer() {
                       </Dialog>
                       <IconButton
                         onClick={() => {
-                          window.location = `/api/v1/customers/update/${customer.id}`;
+                          window.location = `/customers/update/${customer.id}`;
                         }}
                       >
                         <CreateIcon />
