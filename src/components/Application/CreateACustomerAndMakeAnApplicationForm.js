@@ -24,6 +24,8 @@ function CreateACustomerAndMakeAnApplicationForm() {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertType, setAlertType] = useState("success");
   const [alertMessage, setAlertMessage] = useState("");
+  const [identityNumberError, setIdentityNumberError] = useState(false);
+  const [phoneNumberError, setPhoneNumberError] = useState(false);
 
   const [stateCustomer, setStateCustomer] = useState({
     identityNumber: "",
@@ -45,6 +47,23 @@ function CreateACustomerAndMakeAnApplicationForm() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+
+    if (name === "identityNumber") {
+      if (value.length !== 11) {
+        setIdentityNumberError(true);
+      } else {
+        setIdentityNumberError(false);
+      }
+    }
+
+    if (name === "phoneNumber") {
+      if (value.length !== 10) {
+        setPhoneNumberError(true);
+      } else {
+        setPhoneNumberError(false);
+      }
+    }
+
     setStateCustomer({ ...stateCustomer, [name]: value });
   };
 
@@ -137,6 +156,13 @@ function CreateACustomerAndMakeAnApplicationForm() {
               value={stateCustomer.identityNumber}
               onChange={handleChange}
               className={classes.textfield}
+              error={identityNumberError}
+              helperText={
+                identityNumberError
+                  ? "Identity Number must be 11 digits."
+                  : null
+              }
+              inputProps={{ maxLength: 11 }}
             />
             <TextField
               label="Name"
@@ -158,6 +184,13 @@ function CreateACustomerAndMakeAnApplicationForm() {
               value={stateCustomer.phoneNumber}
               onChange={handleChange}
               className={classes.textfield}
+              error={phoneNumberError}
+              helperText={
+                phoneNumberError
+                  ? "Phone number must be 10 digits without leading 0"
+                  : null
+              }
+              inputProps={{ maxLength: 10 }}
             />
             <TextField
               label="Birthdate"
@@ -250,5 +283,4 @@ function CreateACustomerAndMakeAnApplicationForm() {
     </div>
   );
 }
-
 export default CreateACustomerAndMakeAnApplicationForm;

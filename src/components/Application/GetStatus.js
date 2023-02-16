@@ -11,8 +11,9 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Container from "@mui/material/Container";
-
 import Grid from "@mui/material/Unstable_Grid2";
+import MuiAlert from "@material-ui/lab/Alert";
+import { Snackbar } from "@material-ui/core";
 
 const useStyles = makeStyles({
   table: {
@@ -28,12 +29,36 @@ function GetStatus() {
   const [birthDate, setBirthDate] = useState("");
   const [applicationList, setApplicationList] = useState([]);
   const classes = useStyles();
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertType, setAlertType] = useState("success");
+  const [alertMessage, setAlertMessage] = useState("");
+
+  const handleCloseAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setAlertOpen(false);
+  };
 
   const handleSubmit = async () => {
-    const response = await axios.get(
-      `/applications/get-status?identityNumber=${identityNumber}&birthDate=${birthDate}`
-    );
-    setApplicationList(response.data);
+    try {
+      const response = await axios.get(
+        `/applications/get-status?identityNumber=${identityNumber}&birthDate=${birthDate}`
+      );
+      if (response.status === 200) {
+        setApplicationList(response.data);
+        setIdentityNumber("");
+        setBirthDate("");
+        setAlertType("success");
+        setAlertMessage("The application has been successfully searched");
+        setAlertOpen(true);
+      }
+    } catch (error) {
+      console.error(error);
+      setAlertType("error");
+      setAlertMessage("Application not found.");
+      setAlertOpen(true);
+    }
   };
 
   return (
@@ -138,6 +163,20 @@ function GetStatus() {
             </TableBody>
           </Table>
         </TableContainer>
+        <Snackbar
+          open={alertOpen}
+          autoHideDuration={1500}
+          onClose={handleCloseAlert}
+        >
+          <MuiAlert
+            elevation={6}
+            variant="filled"
+            onClose={handleCloseAlert}
+            severity={alertType}
+          >
+            {alertMessage}
+          </MuiAlert>
+        </Snackbar>
       </Container>
     </div>
   );
