@@ -52,7 +52,7 @@ function GetStatus() {
               style={{ margin: "10px 0" }}
             />
             <TextField
-              label="Doğum Tarihi"
+              label="Birthdate"
               name="birthDate"
               type="date"
               value={birthDate}

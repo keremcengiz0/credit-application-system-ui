@@ -107,35 +107,35 @@ function CreateACustomerAndMakeAnApplicationForm() {
               <b>Create a Customer</b>
             </Typography>
             <TextField
-              label="Kimlik Numarası"
+              label="Identity Number"
               name="identityNumber"
               value={stateCustomer.identityNumber}
               onChange={handleChange}
               className={classes.textfield}
             />
             <TextField
-              label="İsim"
+              label="Name"
               name="firstName"
               value={stateCustomer.firstName}
               onChange={handleChange}
               className={classes.textfield}
             />
             <TextField
-              label="Soyisim"
+              label="Surname"
               name="lastName"
               value={stateCustomer.lastName}
               onChange={handleChange}
               className={classes.textfield}
             />
             <TextField
-              label="Telefon Numarası"
+              label="Phone Number"
               name="phoneNumber"
               value={stateCustomer.phoneNumber}
               onChange={handleChange}
               className={classes.textfield}
             />
             <TextField
-              label="Doğum Tarihi"
+              label="Birthdate"
               name="birthDate"
               type="date"
               value={stateCustomer.birthDate}
@@ -157,13 +157,13 @@ function CreateACustomerAndMakeAnApplicationForm() {
             <br />
             <br />
             <TextField
-              label="Kimlik Numarası"
+              label="Identity Number"
               name="identityNumber"
               value={stateApplication.identityNumber}
               disabled
             />
             <TextField
-              label="Maaş"
+              label="Salary"
               name="salary"
               value={stateApplication.salary}
               onChange={(event) =>
@@ -174,7 +174,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
               }
             />
             <TextField
-              label="Teminat"
+              label="Guarantee"
               name="guarantee"
               value={stateApplication.guarantee}
               onChange={(event) =>

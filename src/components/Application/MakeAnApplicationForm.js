@@ -63,7 +63,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
             <b>Make an Application</b>
           </Typography>
           <TextField
-            label="Kimlik Numarası"
+            label="Identity Number"
             name="identityNumber"
             value={stateApplication.identityNumber}
             className={classes.textfield}
@@ -75,7 +75,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
             }
           />
           <TextField
-            label="Maaş"
+            label="Salary"
             name="salary"
             value={stateApplication.salary}
             className={classes.textfield}
@@ -87,7 +87,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
             }
           />
           <TextField
-            label="Teminat"
+            label="Guarantee"
             name="guarantee"
             value={stateApplication.guarantee}
             className={classes.textfield}

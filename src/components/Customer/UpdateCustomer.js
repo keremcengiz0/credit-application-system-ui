@@ -1,18 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { TextField, Button, Stepper, Step, StepLabel } from "@material-ui/core";
+import {
+  TextField,
+  Button,
+  Stepper,
+  Step,
+  StepLabel,
+  Snackbar,
+} from "@material-ui/core";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@mui/material/Typography";
+import MuiAlert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles((theme) => ({
   textfield: { marginTop: 20 },
+  alertStyle: {
+    position: "fixed",
+    bottom: "50%",
+    left: "50%",
+    transform: "translate(-50%, 50%)",
+    width: "400px",
+    zIndex: 9999,
+  },
 }));
 
 const UpdateCustomer = () => {
   let navigate = useNavigate();
   const classes = useStyles();
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertType, setAlertType] = useState("success");
+  const [alertMessage, setAlertMessage] = useState("");
 
   const [customer, setCustomer] = useState({
     identityNumber: "",
@@ -36,8 +55,26 @@ const UpdateCustomer = () => {
   };
 
   const handleUpdate = async () => {
-    await axios.put(`/api/v1/customers/${id}`, customer);
-    navigate("/api/v1/customers");
+    try {
+      await axios.put(`/api/v1/customers/${id}`, customer);
+      setAlertType("success");
+      setAlertMessage("Müşteri başarıyla güncellendi");
+      setAlertOpen(true);
+      setTimeout(() => {
+        navigate("/api/v1/customers");
+      }, 2000);
+    } catch (error) {
+      setAlertType("error");
+      setAlertMessage("Müşteri güncellenemedi");
+      setAlertOpen(true);
+    }
+  };
+
+  const handleCloseAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setAlertOpen(false);
   };
 
   return (
@@ -96,6 +133,21 @@ const UpdateCustomer = () => {
       >
         <b>Update</b>
       </Button>
+
+      <Snackbar
+        open={alertOpen}
+        autoHideDuration={2000}
+        onClose={handleCloseAlert}
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={handleCloseAlert}
+          severity={alertType}
+        >
+          {alertMessage}
+        </MuiAlert>
+      </Snackbar>
     </div>
   );
 };
