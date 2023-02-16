@@ -66,13 +66,22 @@ function CreateACustomerAndMakeAnApplicationForm() {
     <div>
       <br />
       <br />
-      <Stepper>
-        {steps.map((label) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Stepper
+          style={{
+            width: "80%",
+            backgroundColor: "transparent",
+            marginLeft: 100,
+          }}
+        >
+          {steps.map((label) => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+      </div>
+
       <div>
         <div>
           <Typography style={{ marginLeft: -60 }} variant="h5">

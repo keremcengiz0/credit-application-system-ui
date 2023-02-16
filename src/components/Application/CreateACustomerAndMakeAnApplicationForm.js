@@ -105,6 +105,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
   return (
     <div>
       <br />
+      <br />
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Stepper
           activeStep={activeStep}
