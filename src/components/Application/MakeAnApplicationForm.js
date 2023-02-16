@@ -6,10 +6,12 @@ import {
   Button,
   Typography,
   TextField,
+  Snackbar,
 } from "@material-ui/core";
 import Axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import { useNavigate } from "react-router-dom";
+import MuiAlert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles((theme) => ({
   textfield: { marginTop: 20 },
@@ -17,8 +19,10 @@ const useStyles = makeStyles((theme) => ({
 
 function CreateACustomerAndMakeAnApplicationForm() {
   const classes = useStyles();
-  const refreshPage = () => window.location.reload(true);
   let navigate = useNavigate();
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertType, setAlertType] = useState("success");
+  const [alertMessage, setAlertMessage] = useState("");
 
   const [stateApplication, setStateApplication] = useState({
     identityNumber: "",
@@ -26,7 +30,14 @@ function CreateACustomerAndMakeAnApplicationForm() {
     guarantee: "",
   });
 
-  const steps = ["Başvuru Yap"];
+  const handleCloseAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setAlertOpen(false);
+  };
+
+  const steps = ["Make an Application"];
 
   const handleApplicationSubmit = async () => {
     const applicationData = { ...stateApplication };
@@ -34,14 +45,19 @@ function CreateACustomerAndMakeAnApplicationForm() {
       const response = await Axios.post(
         `/api/v1/applications/${applicationData.identityNumber}`,
         applicationData
-      ).then((response) => {
-        refreshPage();
-      });
+      );
       if (response.status === 200) {
-        console.log("Başvuru oluşturuldu!");
-        navigate("/");
+        setAlertType("success");
+        setAlertMessage("Application completed successfully");
+        setAlertOpen(true);
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
       }
     } catch (error) {
+      setAlertType("error");
+      setAlertMessage("Application failed");
+      setAlertOpen(true);
       console.error(error);
     }
   };
@@ -104,6 +120,21 @@ function CreateACustomerAndMakeAnApplicationForm() {
           >
             <b>APPLY</b>
           </Button>
+
+          <Snackbar
+            open={alertOpen}
+            autoHideDuration={1500}
+            onClose={handleCloseAlert}
+          >
+            <MuiAlert
+              elevation={6}
+              variant="filled"
+              onClose={handleCloseAlert}
+              severity={alertType}
+            >
+              {alertMessage}
+            </MuiAlert>
+          </Snackbar>
         </div>
       </div>
     </div>

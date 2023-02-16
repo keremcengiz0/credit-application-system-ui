@@ -58,7 +58,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
           identityNumber: customerData.identityNumber,
         });
         setAlertType("success");
-        setAlertMessage("THE CUSTOMER HAS BEEN SUCCESSFULLY CREATED");
+        setAlertMessage("The customer has been successfully created");
         setAlertOpen(true);
         setTimeout(() => {
           handleNext();
@@ -67,7 +67,7 @@ function CreateACustomerAndMakeAnApplicationForm() {
     } catch (error) {
       console.error(error);
       setAlertType("error");
-      setAlertMessage("FAILED TO CREATE CUSTOMER");
+      setAlertMessage("Failed to create customer");
       setAlertOpen(true);
     }
   };
@@ -228,21 +228,21 @@ function CreateACustomerAndMakeAnApplicationForm() {
               style={{ marginLeft: 25, marginTop: 20 }}
             >
               <b>APPLY</b>
-              <Snackbar
-                open={alertOpen}
-                autoHideDuration={1500}
-                onClose={handleCloseAlert}
-              >
-                <MuiAlert
-                  elevation={6}
-                  variant="filled"
-                  onClose={handleCloseAlert}
-                  severity={alertType}
-                >
-                  {alertMessage}
-                </MuiAlert>
-              </Snackbar>
             </Button>
+            <Snackbar
+              open={alertOpen}
+              autoHideDuration={1500}
+              onClose={handleCloseAlert}
+            >
+              <MuiAlert
+                elevation={6}
+                variant="filled"
+                onClose={handleCloseAlert}
+                severity={alertType}
+              >
+                {alertMessage}
+              </MuiAlert>
+            </Snackbar>
           </div>
         )}
       </div>
