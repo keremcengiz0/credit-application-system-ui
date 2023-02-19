@@ -1,11 +1,12 @@
-import React from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  return (
-    <div>
-      <p>Home</p>
-    </div>
-  );
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    navigate("/applications/create-customer-and-make-application");
+  }, []);
 };
 
 export default Home;
